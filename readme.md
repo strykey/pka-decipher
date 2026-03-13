@@ -26,9 +26,9 @@
 
 PKA Decipher is a desktop tool that lets you open a Cisco Packet Tracer `.pka` or `.pkt` file, read the raw XML payload hidden inside, apply patches to it, and write it back to disk as a perfectly valid encrypted file that Packet Tracer will open without complaining.
 
-The main application is **PKA_DECIPHER.py**, a full-featured editor with an XML viewer, live stats and a whole library of patch presets. Alongside it lives **PATCHER.py**, which is an intentionally simple example that demonstrates exactly how to use the `Decipher/` library to build your own patcher from scratch. It implements one specific patch — making the activity start already at 100% by replacing the COMPARISONS block — and shows the complete decrypt / modify XML / re-encrypt cycle in the most straightforward way possible. If you want to write your own tool on top of this crypto stack, PATCHER.py is the reference to read first.
+The main application is **PKA_DECIPHER.py**, a full-featured editor with an XML viewer, live stats and a whole library of patch presets. Alongside it lives **PATCHER.py**, which is an intentionally simple example that demonstrates exactly how to use the `Decipher/` library to build your own patcher from scratch. It implements one specific patch making the activity start already at 100% by replacing the COMPARISONS block and shows the complete decrypt / modify XML / re-encrypt cycle in the most straightforward way possible. If you want to write your own tool on top of this crypto stack, PATCHER.py is the reference to read first.
 
-The entire cryptographic pipeline — Twofish block cipher, CTR mode, CMAC authentication, EAX authenticated encryption — is implemented in pure Python, from scratch, with zero third-party crypto dependencies. Because why not.
+The entire cryptographic pipeline Twofish block cipher, CTR mode, CMAC authentication, EAX authenticated encryption is implemented in pure Python, from scratch, with zero third-party crypto dependencies. Because why not.
 
 > **Disclaimer:** This project is provided for educational and research purposes only. It was built to understand how Packet Tracer formats its files. The author is not responsible for any misuse. Use it on your own files.
 
