@@ -24,9 +24,11 @@
 
 ## What is this
 
-PKA Decipher is a desktop tool that lets you open a Cisco Packet Tracer `.pka` or `.pkt` file, read the raw XML payload hidden inside, apply patches to it, and write it back to disk as a perfectly valid encrypted file that Packet Tracer will open without complaining. It comes in two flavors: a full-featured editor called **PKA Decipher** and a minimal one-click autopatcher called **PKA Injector**.
+PKA Decipher is a desktop tool that lets you open a Cisco Packet Tracer `.pka` or `.pkt` file, read the raw XML payload hidden inside, apply patches to it, and write it back to disk as a perfectly valid encrypted file that Packet Tracer will open without complaining.
 
-The entire cryptographic pipeline : Twofish block cipher, CTR mode, CMAC authentication, EAX authenticated encryption : is implemented in pure Python, from scratch, with zero third-party crypto dependencies. Because why not.
+The main application is **PKA_DECIPHER.py**, a full-featured editor with an XML viewer, live stats and a whole library of patch presets. Alongside it lives **PATCHER.py**, which is an intentionally simple example that demonstrates exactly how to use the `Decipher/` library to build your own patcher from scratch. It implements one specific patch — making the activity start already at 100% by replacing the COMPARISONS block — and shows the complete decrypt / modify XML / re-encrypt cycle in the most straightforward way possible. If you want to write your own tool on top of this crypto stack, PATCHER.py is the reference to read first.
+
+The entire cryptographic pipeline — Twofish block cipher, CTR mode, CMAC authentication, EAX authenticated encryption — is implemented in pure Python, from scratch, with zero third-party crypto dependencies. Because why not.
 
 > **Disclaimer:** This project is provided for educational and research purposes only. It was built to understand how Packet Tracer formats its files. The author is not responsible for any misuse. Use it on your own files.
 
@@ -73,7 +75,7 @@ The entire cryptographic layer lives in the `Decipher/` folder and is implemente
 ```
 pka-decipher/
 ├── PKA_DECIPHER.py       # Full desktop editor with XML viewer, presets, live stats
-├── PATCHER.py            # Minimal one-click injector, drops verification nodes
+├── PATCHER.py            # Example patcher: shows how to use Decipher/ to build your own tool
 ├── Decipher/
 │   ├── twofish.py        # Twofish 128-bit block cipher, pure Python
 │   ├── cmac.py           # CMAC message authentication code
@@ -118,13 +120,15 @@ A window opens with a three-panel layout. The left sidebar shows all the availab
 
 To use it, click the file picker, select your `.pka` or `.pkt` file, wait a second for it to decrypt and load, then pick any combination of presets from the left panel and click Apply. Each preset logs exactly what it changed. When you are done, click Save and the file is re-encrypted and written back to disk.
 
-**PKA Injector** is the minimal version for when you just want 100% and nothing else. Run it with:
+**PATCHER.py** is an example script that shows how to use the `Decipher/` library to build a custom patcher. The patch it implements specifically makes the activity register as already completed at 100% on launch: it replaces the entire COMPARISONS block in the XML with a single always-true verification node worth 100 points, so Packet Tracer considers the activity done from the moment it opens. Run it with:
 
 ```bash
 python PATCHER.py
 ```
 
-A small card-style window opens, you pick your file, you click Inject, done. The progress bar walks through each step live: reading, decrypting, patching, re-encrypting, writing. The verification node block is replaced with a single always-passing node worth 100 points.
+A small card-style window opens, you pick your file, you click Inject, done. The progress bar walks through each step live: reading, decrypting Twofish/EAX, patching the COMPARISONS block, re-encrypting, writing back to disk. The file is replaced atomically so nothing is corrupted if something goes wrong midway.
+
+This file is also the cleanest way to understand how to wire the `Decipher/` crypto stack into your own script. The pipeline is: `decrypt_pkt` to get the XML, modify the string however you want, then `xml_to_pka` to get back the encrypted bytes ready to write to disk. That is the whole API.
 
 <br/>
 
@@ -132,7 +136,7 @@ A small card-style window opens, you pick your file, you click Inject, done. The
 
 PKA Decipher ships with a full set of presets that can be applied individually or combined in any order.
 
-**100% Completion** strips all verification nodes from the COMPARISONS block and replaces them with a single always-true node worth 100 points. This is the main preset, it is what PATCHER.py uses automatically.
+**100% Completion** strips all verification nodes from the COMPARISONS block and replaces them with a single always-true node worth 100 points. This makes the activity register as already completed at 100% the moment it is opened in Packet Tracer. This is also the exact patch that PATCHER.py demonstrates as a usage example of the crypto library.
 
 **God Score** sets every POINTS node in the file to 100. Good for when the activity uses a weighted scoring system that the previous preset alone does not fully cover.
 
