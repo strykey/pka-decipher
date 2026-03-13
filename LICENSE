@@ -1,0 +1,46 @@
+Copyright (c) 2025 Strykey. All rights reserved.
+
+TERMS AND CONDITIONS
+
+1. PERMITTED USE
+   You may view and study the source code of this repository for personal,
+   non-commercial, educational purposes only.
+
+2. PROHIBITED ACTIONS
+   You may NOT, without explicit prior written permission from the author:
+
+   a) Use this software or any part of it in a commercial product or service.
+   b) Redistribute, sublicense, sell, rent or lease this software or any
+      derivative work based on it.
+   c) Publish modified versions of this software under your own name or any
+      other name.
+   d) Include this software or any portion of it in another project, whether
+      open source or proprietary.
+   e) Remove or alter any copyright, trademark or attribution notices contained
+      in this software.
+   f) Use the name "PKA Decipher", "PKA Injector" or "Strykey" to endorse or
+      promote products derived from this software without prior written consent.
+
+3. FORKS AND CONTRIBUTIONS
+   Forks on GitHub are permitted solely for the purpose of submitting pull
+   requests to this repository. A fork that is not actively pursuing a pull
+   request must not be made publicly available as a standalone project.
+   Contributions submitted as pull requests grant the author a perpetual,
+   irrevocable, royalty-free license to use, modify and include those
+   contributions in this project under these same terms.
+
+4. DISCLAIMER
+   THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+   ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+5. TERMINATION
+   Any breach of these terms automatically terminates your rights under this
+   license. Upon termination you must destroy all copies of the software in
+   your possession.
+
+For permissions beyond the scope of this license, contact the author directly
+via GitHub: https://github.com/strykey
